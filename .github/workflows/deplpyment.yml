@@ -1,0 +1,33 @@
+name: Test project
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get code
+        uses: actions/checkout@v3
+      - name: install nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: install dependecies
+        run: npm i
+      - name: run test
+        run: npm run test
+      - name: byeeee
+        run: echo 'gooodbyeee'
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get code deploy
+        uses: actions/checkout@v3
+      - name: install nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: install dependecies deploy
+        run: npm i
+      - name: build deploy
+        run:  npm run build
+      - name: deploy 
+        run: echo "deploy......1.2.3"
