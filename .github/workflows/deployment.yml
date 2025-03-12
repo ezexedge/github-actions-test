@@ -5,17 +5,21 @@ on:
       - main
       - dev
       - feat/project-with-enviroment
+      - feat/with-docker-containers
 env:
   MONGODB_DB_NAME: test
 jobs:
   test:
     env:
+      MONGODB_CONNECTION_PROTOCOL: mongodb+srv
       MONGODB_CLUSTER_ADDRESS: ${{secrets.MONGODB_CLUSTER_ADDRESS}}
       MONGODB_USERNAME: ${{secrets.MONGODB_USERNAME}}
       MONGODB_PASSWORD: ${{secrets.MONGODB_PASSWORD}}
       PORT: 8080
     environment: testing
     runs-on: ubuntu-latest
+    container:
+      image: node:16
     steps:
       - name: Get Code
         uses: actions/checkout@v3
