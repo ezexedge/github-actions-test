@@ -6,9 +6,10 @@ dotenv.config();
 const clusterAddress = process.env.MONGODB_CLUSTER_ADDRESS;
 const dbUser = process.env.MONGODB_USERNAME;
 const dbPassword = process.env.MONGODB_PASSWORD;
-const dbName = process.env.MONGODB_DB_NAME;
+const dbName = process.env.MONGODB_DB_NAME || "test";
 
-const uri = `mongodb+srv://${dbUser}:${dbPassword}@${clusterAddress}/?retryWrites=true&w=majority&appName=Cluster0`;
+// Construir URI de conexión para entorno de GitHub Actions
+const uri = `mongodb://${dbUser}:${dbPassword}@${clusterAddress}:27017/${dbName}?authSource=admin`;
 console.log("uri", uri);
 const client = new MongoClient(uri);
 
